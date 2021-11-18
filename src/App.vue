@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <SiteHeader @getAPI="buildAPI" />
-    <SiteMain :stringAPI="stringAPI" />
+    <SiteHeader @getAPI="sendEntry" />
+    <SiteMain :stringEntry="stringEntry" />
 
     <!-- <img alt="Vue logo" src="./assets/logo.png" />
     <HelloWorld msg="Welcome to Your Vue.js App" /> -->
@@ -22,15 +22,12 @@ export default {
   },
   data() {
     return {
-      preFixed:
-        "https://api.themoviedb.org/3/search/movie?api_key=f827a5bacdaf0b2436071ace43764985&language=en-US&query=",
-      sufFixed: "&page=1&include_adult=false",
-      stringAPI: "",
+      stringEntry: "",
     };
   },
   methods: {
-    buildAPI(entry) {
-      this.stringAPI = this.preFixed + entry + this.sufFixed;
+    sendEntry(entry) {
+      this.stringEntry = entry;
     },
   },
 };
