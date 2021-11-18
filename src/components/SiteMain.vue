@@ -1,5 +1,12 @@
 <template>
-  <div></div>
+  <main>
+    <ol>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ol>
+  </main>
 </template>
 
 <script>

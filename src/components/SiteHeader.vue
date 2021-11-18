@@ -1,5 +1,8 @@
 <template>
-  <div></div>
+  <header>
+    <label for="chars">Type some characters to search a Movie:</label>
+    <input type="text" id="chars" name="chars" />
+  </header>
 </template>
 
 <script>
