@@ -10,7 +10,12 @@
 </template>
 
 <script>
-export default {};
+// import axios from "axios";
+export default {
+  props: {
+    stringAPI: String,
+  },
+};
 </script>
 
 <style>

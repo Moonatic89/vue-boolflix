@@ -20,6 +20,7 @@ export default {
   methods: {
     buildAPI() {
       this.stringAPI = this.preFixed + this.entry + this.sufFixed;
+      this.$emit("getAPI", this.stringAPI);
     },
   },
 };

@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <SiteHeader />
-    <SiteMain />
+    <SiteHeader @getAPI="buildAPI" />
+    <SiteMain :stringAPI="stringAPI" />
 
     <!-- <img alt="Vue logo" src="./assets/logo.png" />
     <HelloWorld msg="Welcome to Your Vue.js App" /> -->
