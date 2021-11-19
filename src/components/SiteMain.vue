@@ -30,6 +30,7 @@
 
 
 <script>
+import axios from "axios";
 export default {
   props: {
     movies: Array,
@@ -52,14 +53,23 @@ export default {
         case "ja":
           flag = "jp";
           break;
-        case "ja":
-          flag = "jp";
-          break;
-        default:
-          return false;
-      }
+        default: {
+          const flagUrlCheck = this.flagURL + flag + this.formatPNG;
 
-      return this.flagURL + flag + this.formatPNG;
+          axios
+            .get(flagUrlCheck)
+            .then((r) => {
+              console.log(r);
+            })
+            .catch((err) => {
+              if (err == "404") {
+                return false;
+              }
+            });
+
+          return this.flagURL + flag + this.formatPNG;
+        }
+      }
     },
   },
 };
