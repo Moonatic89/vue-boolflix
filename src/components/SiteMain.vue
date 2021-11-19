@@ -10,9 +10,13 @@
             Lingua:
             <img
               class="flag"
+              v-if="generateFlag(movie.original_language) != false"
               :src="generateFlag(movie.original_language)"
               alt=""
             />
+            <span v-else>
+              <strong>{{ movie.original_language }}</strong>
+            </span>
           </li>
           <li>Voto: {{ movie.vote_average }}</li>
           <br />
@@ -41,6 +45,20 @@ export default {
   },
   methods: {
     generateFlag(flag) {
+      switch (flag) {
+        case "en":
+          flag = "gb";
+          break;
+        case "ja":
+          flag = "jp";
+          break;
+        case "ja":
+          flag = "jp";
+          break;
+        default:
+          return false;
+      }
+
       return this.flagURL + flag + this.formatPNG;
     },
   },
@@ -51,6 +69,7 @@ export default {
 
 <style lang="scss">
 .flag {
-  background-color: red;
+  width: 20px;
+  height: 15px;
 }
 </style>
