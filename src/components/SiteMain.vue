@@ -10,13 +10,12 @@
             Lingua:
             <img
               class="flag"
-              v-if="generateFlag(movie.original_language) != false"
               :src="generateFlag(movie.original_language)"
+              @error="isImageBroken"
               alt=""
             />
-            <span v-else>
-              <strong>{{ movie.original_language }}</strong>
-            </span>
+
+            <!-- <img v-else class="flag" src="../assets/error.png" alt="" /> -->
           </li>
           <li>Voto: {{ movie.vote_average }}</li>
           <br />
@@ -30,7 +29,7 @@
 
 
 <script>
-import axios from "axios";
+// import axios from "axios";
 export default {
   props: {
     movies: Array,
@@ -38,10 +37,10 @@ export default {
 
   data() {
     return {
+      brokenURL: "./assets/error.png",
       flagURL: "https://flagcdn.com/256x192/",
       formatPNG: ".png",
       flag: "",
-      //   importedAPI: [],
     };
   },
   methods: {
@@ -53,23 +52,13 @@ export default {
         case "ja":
           flag = "jp";
           break;
-        default: {
-          const flagUrlCheck = this.flagURL + flag + this.formatPNG;
-
-          axios
-            .get(flagUrlCheck)
-            .then((r) => {
-              console.log(r);
-            })
-            .catch((err) => {
-              if (err == "404") {
-                return false;
-              }
-            });
-
-          return this.flagURL + flag + this.formatPNG;
-        }
       }
+
+      return this.flagURL + flag + this.formatPNG;
+    },
+    isImageBroken(event) {
+      console.log("Image not found");
+      // event.target.src = this.brokenURL;
     },
   },
 };
