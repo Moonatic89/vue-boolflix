@@ -30,6 +30,13 @@
                       <i class="fas fa-star"></i>
                     </span>
                   </li>
+
+                  <div class="member" v-for="i in 5" :key="i">
+                    <span>
+                      {{ generateCastMembers(movie.id, i) }}
+                    </span>
+                  </div>
+
                   <li>
                     {{ movie.overview }}
                   </li>
@@ -45,8 +52,8 @@
             <h2>{{ movie.title }}</h2>
           </div>
         </div>
-        <h2 v-show="series.length > 0">TV Series</h2>
 
+        <h2 v-show="series.length > 0">TV Series</h2>
         <div class="row">
           <div class="card" v-for="serie in series" :key="serie.id">
             <div class="imageBox">
@@ -75,6 +82,7 @@
                   <li>
                     {{ serie.overview }}
                   </li>
+                  <li></li>
                 </ul>
               </div>
               <img
@@ -94,7 +102,7 @@
 
 
 <script>
-// import axios from "axios";
+import axios from "axios";
 export default {
   props: {
     movies: Array,
@@ -104,6 +112,11 @@ export default {
   data() {
     return {
       imageURL: "https://image.tmdb.org/t/p/",
+      castURL: "https://api.themoviedb.org/3/movie/",
+      castMember: "",
+      castArr: [],
+      apiKey: "/credits?api_key=f827a5bacdaf0b2436071ace43764985",
+
       backdropSize: "w342",
       brokenURL: "assets/error.png",
       flagURL: "https://flagcdn.com/256x192/",
@@ -127,6 +140,14 @@ export default {
     generateCover(cover) {
       return this.imageURL + this.backdropSize + cover;
     },
+
+    generateCastMembers(entryID, index) {
+      axios.get(this.castURL + entryID + this.apiKey).then((r) => {
+        console.log(r.data.cast[index - 1].name);
+        this.castMember = r.data.cast[index - 1].name;
+      });
+    },
+
     isImageBroken(event) {
       event.target.src = event.target.baseURI + this.brokenURL;
       console.log(event);
