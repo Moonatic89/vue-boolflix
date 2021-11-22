@@ -5,50 +5,44 @@
       <div class="container">
         <div class="row">
           <div class="card" v-for="movie in movies" :key="movie.id">
-            <img
-              class="cover"
-              :src="generateCover(movie.poster_path)"
-              @error="isImageBroken"
-              alt=""
-            />
+            <div class="imageBox">
+              <div class="overlay">
+                <ul>
+                  <li>Titolo: {{ movie.title }}</li>
+                  <li>Titolo Originale: {{ movie.original_title }}</li>
+                  <li>
+                    Lingua:
+                    <img
+                      class="flag"
+                      :src="generateFlag(movie.original_language)"
+                      @error="isImageBroken"
+                      alt=""
+                    />
+
+                    <!-- <img v-else class="flag" src="../assets/error.png" alt="" /> -->
+                  </li>
+                  <li>
+                    Voto:
+                    <span
+                      v-for="i in Math.ceil(movie.vote_average / 2)"
+                      v-bind:key="i"
+                    >
+                      <i class="fas fa-star"></i>
+                    </span>
+                  </li>
+                </ul>
+              </div>
+              <img
+                class="cover"
+                :src="generateCover(movie.poster_path)"
+                @error="isImageBroken"
+                alt=""
+              />
+            </div>
+            <h2>{{ movie.title }}</h2>
           </div>
         </div>
       </div>
-
-      <li v-for="movie in movies" :key="movie.id">
-        <ul>
-          <li>Titolo: {{ movie.title }}</li>
-          <li>Titolo Originale: {{ movie.original_title }}</li>
-          <li>
-            Lingua:
-            <img
-              class="flag"
-              :src="generateFlag(movie.original_language)"
-              @error="isImageBroken"
-              alt=""
-            />
-
-            <!-- <img v-else class="flag" src="../assets/error.png" alt="" /> -->
-          </li>
-          <li>
-            Voto:
-            <span v-for="i in Math.ceil(movie.vote_average / 2)" v-bind:key="i">
-              <i class="fas fa-star"></i>
-            </span>
-          </li>
-          <li>
-            Copertina:
-            <img
-              class="cover"
-              :src="generateCover(movie.backdrop_path)"
-              @error="isImageBroken"
-              alt=""
-            />
-          </li>
-          <li></li>
-          <br />
-        </ul>
-      </li>
     </div>
 
     <!-- 
@@ -190,8 +184,16 @@ main {
     flex-wrap: wrap;
     justify-content: space-evenly;
 
+    .card img:hover {
+      display: none;
+    }
+
     .card {
       padding: 2rem 2.5rem;
+
+      h2 {
+        text-align: center;
+      }
     }
   }
 
