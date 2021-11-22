@@ -144,7 +144,7 @@ export default {
     generateCastMembers(entryID, index) {
       axios.get(this.castURL + entryID + this.apiKey).then((r) => {
         console.log(r.data.cast[index - 1].name);
-        this.castMember = r.data.cast[index - 1].name;
+        return r.data.cast[index - 1].name;
       });
     },
 
