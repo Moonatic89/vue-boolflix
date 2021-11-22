@@ -1,6 +1,5 @@
 <template>
   <main>
-    <h1></h1>
     <ol>
       <li v-for="movie in movies" :key="movie.id">
         <ul>
@@ -33,11 +32,12 @@
 export default {
   props: {
     movies: Array,
+    series: Array,
   },
 
   data() {
     return {
-      brokenURL: "./assets/error.png",
+      brokenURL: "assets/error.png",
       flagURL: "https://flagcdn.com/256x192/",
       formatPNG: ".png",
       flag: "",
@@ -57,8 +57,9 @@ export default {
       return this.flagURL + flag + this.formatPNG;
     },
     isImageBroken(event) {
-      console.log("Image not found");
-      // event.target.src = this.brokenURL;
+      //console.log(event);
+      event.target.src = event.target.baseURI + this.brokenURL;
+      console.log(event);
     },
   },
 };

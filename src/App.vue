@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <SiteHeader @getAPI="getEntry" />
-    <SiteMain :movies="importedAPI" />
+    <SiteMain :movies="importedMovies" :series="importedSeries" />
 
     <!-- <img alt="Vue logo" src="./assets/logo.png" />
     <HelloWorld msg="Welcome to Your Vue.js App" /> -->
@@ -22,22 +22,26 @@ export default {
   data() {
     return {
       stringEntry: "",
-      importedAPI: [],
+      importedMovies: [],
+      importedSeries: [],
       preFixed:
         "https://api.themoviedb.org/3/search/movie?api_key=f827a5bacdaf0b2436071ace43764985&language=en-US&query=",
-      sufFixed: "&page=1&include_adult=false",
-
       preFixedSeries:
         "https://api.themoviedb.org/3/search/tv?api_key=f827a5bacdaf0b2436071ace43764985&language=en-US&query=",
-      // SufFixedSeries:"",
+
+      sufFixed: "&page=1&include_adult=false",
     };
   },
   methods: {
     getEntry(entry) {
       this.stringEntry = this.preFixed + entry + this.sufFixed;
       axios.get(this.stringEntry).then((r) => {
-        // console.log(r.data.results);
-        this.importedAPI = r.data.results;
+        this.importedMovies = r.data.results;
+      });
+
+      this.stringEntry = this.preFixedSeries + entry + this.sufFixed;
+      axios.get(this.stringEntry).then((r) => {
+        this.importedSeries = r.data.results;
       });
     },
   },
