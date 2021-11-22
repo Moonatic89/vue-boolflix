@@ -1,28 +1,56 @@
 <template>
   <main>
-    <ol>
-      <li v-for="movie in movies" :key="movie.id">
-        <ul>
-          <li>Titolo: {{ movie.title }}</li>
-          <li>Titolo Originale: {{ movie.original_title }}</li>
-          <li>
-            Lingua:
-            <img
-              class="flag"
-              :src="generateFlag(movie.original_language)"
-              @error="isImageBroken"
-              alt=""
-            />
+    <div class="movies">
+      <h2>Movies</h2>
+      <ol>
+        <li v-for="movie in movies" :key="movie.id">
+          <ul>
+            <li>Titolo: {{ movie.title }}</li>
+            <li>Titolo Originale: {{ movie.original_title }}</li>
+            <li>
+              Lingua:
+              <img
+                class="flag"
+                :src="generateFlag(movie.original_language)"
+                @error="isImageBroken"
+                alt=""
+              />
 
-            <!-- <img v-else class="flag" src="../assets/error.png" alt="" /> -->
-          </li>
-          <li>Voto: {{ movie.vote_average }}</li>
-          <br />
-        </ul>
-      </li>
+              <!-- <img v-else class="flag" src="../assets/error.png" alt="" /> -->
+            </li>
+            <li>Voto: {{ movie.vote_average }}</li>
+            <br />
+          </ul>
+        </li>
 
-      <ul></ul>
-    </ol>
+        <ul></ul>
+      </ol>
+    </div>
+
+    <div class="series">
+      <h2>TV Series</h2>
+      <ol>
+        <li v-for="serie in series" :key="serie.id">
+          <ul>
+            <li>Titolo: {{ serie.name }}</li>
+            <li>Titolo Originale: {{ serie.original_name }}</li>
+            <li>
+              Lingua:
+              <img
+                class="flag"
+                :src="generateFlag(serie.original_language)"
+                @error="isImageBroken"
+                alt=""
+              />
+            </li>
+            <li>Voto: {{ serie.vote_average }}</li>
+            <br />
+          </ul>
+        </li>
+
+        <ul></ul>
+      </ol>
+    </div>
   </main>
 </template>
 
@@ -68,8 +96,13 @@ export default {
 
 
 <style lang="scss">
-.flag {
-  width: 20px;
-  height: 15px;
+main {
+  display: flex;
+  padding: 0 5rem;
+
+  .flag {
+    width: 20px;
+    height: 15px;
+  }
 }
 </style>
