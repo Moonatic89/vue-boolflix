@@ -89,134 +89,6 @@
         </div>
       </div>
     </div>
-    <!-- 
-    <div class="series">
-      <h2 v-show="series.length > 0">TV Series</h2>
-      <div class="container">
-        <div class="row">
-          <div class="card" v-for="serie in series" :key="serie.id">
-            <div class="imageBox">
-              <div class="overlay">
-                <ul>
-                  <li>Titolo: {{ serie.name }}</li>
-                  <li>Titolo Originale: {{ serie.original_name }}</li>
-                  <li>
-                    Lingua:
-                    <img
-                      class="flag"
-                      :src="generateFlag(serie.original_language)"
-                      @error="isImageBroken"
-                      alt=""
-                    />
-                  </li>
-                  <li>
-                    Voto:
-                    <span
-                      v-for="i in Math.ceil(serie.vote_average / 2)"
-                      v-bind:key="i"
-                    >
-                      <i class="fas fa-star"></i>
-                    </span>
-                  </li>
-                  <li>
-                    {{ serie.overview }}
-                  </li>
-                </ul>
-              </div>
-              <img
-                class="cover"
-                :src="generateCover(serie.poster_path)"
-                @error="isImageBroken"
-                alt=""
-              />
-            </div>
-            <h2>{{ serie.name }}</h2>
-          </div>
-        </div>
-      </div>
-    </div> -->
-
-    <!-- 
-    <div class="movies">
-      <h2 v-show="movies.length > 0">Movies</h2>
-      <ol>
-        <li v-for="movie in movies" :key="movie.id">
-          <ul>
-            <li>Titolo: {{ movie.title }}</li>
-            <li>Titolo Originale: {{ movie.original_title }}</li>
-            <li>
-              Lingua:
-              <img
-                class="flag"
-                :src="generateFlag(movie.original_language)"
-                @error="isImageBroken"
-                alt=""
-              />
-
-            </li>
-            <li>
-              Voto:
-              <span
-                v-for="i in Math.ceil(movie.vote_average / 2)"
-                v-bind:key="i"
-              >
-                <i class="fas fa-star"></i>
-              </span>
-            </li>
-            <li>
-              Copertina:
-              <img
-                class="cover"
-                :src="generateCover(movie.backdrop_path)"
-                @error="isImageBroken"
-                alt=""
-              />
-            </li>
-            <li></li>
-            <br />
-          </ul>
-        </li>
-      </ol>
-    </div> -->
-    <!-- 
-    <div class="series">
-      <h2 v-show="series.length > 0">TV Series</h2>
-      <ol>
-        <li v-for="serie in series" :key="serie.id">
-          <ul>
-            <li>Titolo: {{ serie.name }}</li>
-            <li>Titolo Originale: {{ serie.original_name }}</li>
-            <li>
-              Lingua:
-              <img
-                class="flag"
-                :src="generateFlag(serie.original_language)"
-                @error="isImageBroken"
-                alt=""
-              />
-            </li>
-            <li>
-              Voto:
-              <span
-                v-for="i in Math.ceil(serie.vote_average / 2)"
-                v-bind:key="i"
-              >
-                <i class="fas fa-star"></i>
-              </span>
-            </li>
-            <li>
-              <img
-                class="cover"
-                :src="generateCover(serie.backdrop_path)"
-                @error="isImageBroken"
-                alt=""
-              />
-            </li>
-            <br />
-          </ul>
-        </li>
-      </ol>
-    </div> -->
   </main>
 </template>
 
@@ -267,6 +139,7 @@ export default {
 
 <style lang="scss">
 main {
+  background-color: rgb(200, 197, 197);
   display: flex;
   padding: 0 5rem;
 
