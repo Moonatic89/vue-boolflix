@@ -24,6 +24,11 @@ export default {
       stringEntry: "",
       importedMovies: [],
       importedSeries: [],
+
+      siteURL: "https://api.themoviedb.org/3/search/",
+      searchMovie: "movie",
+      searchTv: "tv",
+
       preFixed:
         "https://api.themoviedb.org/3/search/movie?api_key=f827a5bacdaf0b2436071ace43764985&language=en-US&query=",
       preFixedSeries:
