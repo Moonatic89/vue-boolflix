@@ -1,8 +1,8 @@
 <template>
   <main>
     <div class="movies">
-      <h2 v-show="movies.length > 0">Movies</h2>
       <div class="container">
+        <h2 v-show="movies.length > 0">Movies</h2>
         <div class="row">
           <div class="card" v-for="movie in movies" :key="movie.id">
             <div class="imageBox">
@@ -30,6 +30,9 @@
                       <i class="fas fa-star"></i>
                     </span>
                   </li>
+                  <li>
+                    {{ movie.overview }}
+                  </li>
                 </ul>
               </div>
               <img
@@ -42,8 +45,96 @@
             <h2>{{ movie.title }}</h2>
           </div>
         </div>
+        <h2 v-show="series.length > 0">TV Series</h2>
+
+        <div class="row">
+          <div class="card" v-for="serie in series" :key="serie.id">
+            <div class="imageBox">
+              <div class="overlay">
+                <ul>
+                  <li>Titolo: {{ serie.name }}</li>
+                  <li>Titolo Originale: {{ serie.original_name }}</li>
+                  <li>
+                    Lingua:
+                    <img
+                      class="flag"
+                      :src="generateFlag(serie.original_language)"
+                      @error="isImageBroken"
+                      alt=""
+                    />
+                  </li>
+                  <li>
+                    Voto:
+                    <span
+                      v-for="i in Math.ceil(serie.vote_average / 2)"
+                      v-bind:key="i"
+                    >
+                      <i class="fas fa-star"></i>
+                    </span>
+                  </li>
+                  <li>
+                    {{ serie.overview }}
+                  </li>
+                </ul>
+              </div>
+              <img
+                class="cover"
+                :src="generateCover(serie.poster_path)"
+                @error="isImageBroken"
+                alt=""
+              />
+            </div>
+            <h2>{{ serie.name }}</h2>
+          </div>
+        </div>
       </div>
     </div>
+    <!-- 
+    <div class="series">
+      <h2 v-show="series.length > 0">TV Series</h2>
+      <div class="container">
+        <div class="row">
+          <div class="card" v-for="serie in series" :key="serie.id">
+            <div class="imageBox">
+              <div class="overlay">
+                <ul>
+                  <li>Titolo: {{ serie.name }}</li>
+                  <li>Titolo Originale: {{ serie.original_name }}</li>
+                  <li>
+                    Lingua:
+                    <img
+                      class="flag"
+                      :src="generateFlag(serie.original_language)"
+                      @error="isImageBroken"
+                      alt=""
+                    />
+                  </li>
+                  <li>
+                    Voto:
+                    <span
+                      v-for="i in Math.ceil(serie.vote_average / 2)"
+                      v-bind:key="i"
+                    >
+                      <i class="fas fa-star"></i>
+                    </span>
+                  </li>
+                  <li>
+                    {{ serie.overview }}
+                  </li>
+                </ul>
+              </div>
+              <img
+                class="cover"
+                :src="generateCover(serie.poster_path)"
+                @error="isImageBroken"
+                alt=""
+              />
+            </div>
+            <h2>{{ serie.name }}</h2>
+          </div>
+        </div>
+      </div>
+    </div> -->
 
     <!-- 
     <div class="movies">
@@ -184,13 +275,55 @@ main {
     flex-wrap: wrap;
     justify-content: space-evenly;
 
-    .card img:hover {
-      display: none;
-    }
-
     .card {
-      padding: 2rem 2.5rem;
+      // padding: 2rem 2.5rem;
 
+      .imageBox {
+        position: relative;
+
+        .overlay {
+          margin: 0.5rem;
+          padding: 0.5rem;
+          border-radius: 15px;
+          position: absolute;
+          background: rgb(0, 0, 0);
+          background: linear-gradient(
+            180deg,
+            rgba(0, 0, 0, 1) 0%,
+            rgba(71, 71, 71, 1) 72%,
+            rgba(0, 212, 255, 0) 100%
+          );
+          color: white;
+          width: 330px;
+          height: 512px;
+          overflow-y: auto;
+
+          ul {
+            list-style: none;
+
+            li {
+              padding: 0.25rem 0.25rem;
+            }
+          }
+
+          i {
+            color: yellow;
+          }
+        }
+        img {
+          position: relative;
+          z-index: 1;
+          background-color: black;
+        }
+
+        .overlay:hover {
+          z-index: 2;
+        }
+
+        img:hover {
+          z-index: -1;
+        }
+      }
       h2 {
         text-align: center;
       }
@@ -203,7 +336,10 @@ main {
   }
 
   .cover {
-    width: 300px;
+    width: 342px;
+    height: 512px;
+    object-fit: contain;
+    object-position: top;
   }
 }
 </style>
