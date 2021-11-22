@@ -2,6 +2,58 @@
   <main>
     <div class="movies">
       <h2 v-show="movies.length > 0">Movies</h2>
+      <div class="container">
+        <div class="row">
+          <div class="card" v-for="movie in movies" :key="movie.id">
+            <img
+              class="cover"
+              :src="generateCover(movie.poster_path)"
+              @error="isImageBroken"
+              alt=""
+            />
+          </div>
+        </div>
+      </div>
+
+      <li v-for="movie in movies" :key="movie.id">
+        <ul>
+          <li>Titolo: {{ movie.title }}</li>
+          <li>Titolo Originale: {{ movie.original_title }}</li>
+          <li>
+            Lingua:
+            <img
+              class="flag"
+              :src="generateFlag(movie.original_language)"
+              @error="isImageBroken"
+              alt=""
+            />
+
+            <!-- <img v-else class="flag" src="../assets/error.png" alt="" /> -->
+          </li>
+          <li>
+            Voto:
+            <span v-for="i in Math.ceil(movie.vote_average / 2)" v-bind:key="i">
+              <i class="fas fa-star"></i>
+            </span>
+          </li>
+          <li>
+            Copertina:
+            <img
+              class="cover"
+              :src="generateCover(movie.backdrop_path)"
+              @error="isImageBroken"
+              alt=""
+            />
+          </li>
+          <li></li>
+          <br />
+        </ul>
+      </li>
+    </div>
+
+    <!-- 
+    <div class="movies">
+      <h2 v-show="movies.length > 0">Movies</h2>
       <ol>
         <li v-for="movie in movies" :key="movie.id">
           <ul>
@@ -16,7 +68,6 @@
                 alt=""
               />
 
-              <!-- <img v-else class="flag" src="../assets/error.png" alt="" /> -->
             </li>
             <li>
               Voto:
@@ -41,8 +92,8 @@
           </ul>
         </li>
       </ol>
-    </div>
-
+    </div> -->
+    <!-- 
     <div class="series">
       <h2 v-show="series.length > 0">TV Series</h2>
       <ol>
@@ -80,7 +131,7 @@
           </ul>
         </li>
       </ol>
-    </div>
+    </div> -->
   </main>
 </template>
 
@@ -96,7 +147,7 @@ export default {
   data() {
     return {
       imageURL: "https://image.tmdb.org/t/p/",
-      backdropSize: "w300",
+      backdropSize: "w342",
       brokenURL: "assets/error.png",
       flagURL: "https://flagcdn.com/256x192/",
       formatPNG: ".png",
@@ -133,6 +184,16 @@ export default {
 main {
   display: flex;
   padding: 0 5rem;
+
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+
+    .card {
+      padding: 2rem 2.5rem;
+    }
+  }
 
   .flag {
     width: 20px;
