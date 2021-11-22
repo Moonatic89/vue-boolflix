@@ -1,7 +1,7 @@
 <template>
   <main>
     <div class="movies">
-      <h2>Movies</h2>
+      <h2 v-show="movies.length > 0">Movies</h2>
       <ol>
         <li v-for="movie in movies" :key="movie.id">
           <ul>
@@ -18,7 +18,15 @@
 
               <!-- <img v-else class="flag" src="../assets/error.png" alt="" /> -->
             </li>
-            <li>Voto: {{ movie.vote_average }}</li>
+            <li>
+              Voto:
+              <span
+                v-for="i in Math.ceil(movie.vote_average / 2)"
+                v-bind:key="i"
+              >
+                <i class="fas fa-star"></i>
+              </span>
+            </li>
             <li>
               Copertina:
               <img
@@ -28,16 +36,15 @@
                 alt=""
               />
             </li>
+            <li></li>
             <br />
           </ul>
         </li>
-
-        <ul></ul>
       </ol>
     </div>
 
     <div class="series">
-      <h2>TV Series</h2>
+      <h2 v-show="series.length > 0">TV Series</h2>
       <ol>
         <li v-for="serie in series" :key="serie.id">
           <ul>
@@ -52,7 +59,15 @@
                 alt=""
               />
             </li>
-            <li>Voto: {{ serie.vote_average }}</li>
+            <li>
+              Voto:
+              <span
+                v-for="i in Math.ceil(serie.vote_average / 2)"
+                v-bind:key="i"
+              >
+                <i class="fas fa-star"></i>
+              </span>
+            </li>
             <li>
               <img
                 class="cover"
@@ -64,8 +79,6 @@
             <br />
           </ul>
         </li>
-
-        <ul></ul>
       </ol>
     </div>
   </main>
@@ -107,7 +120,6 @@ export default {
       return this.imageURL + this.backdropSize + cover;
     },
     isImageBroken(event) {
-      //console.log(event);
       event.target.src = event.target.baseURI + this.brokenURL;
       console.log(event);
     },
