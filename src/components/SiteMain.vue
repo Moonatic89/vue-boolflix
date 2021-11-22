@@ -19,6 +19,15 @@
               <!-- <img v-else class="flag" src="../assets/error.png" alt="" /> -->
             </li>
             <li>Voto: {{ movie.vote_average }}</li>
+            <li>
+              Copertina:
+              <img
+                class="cover"
+                :src="generateCover(movie.backdrop_path)"
+                @error="isImageBroken"
+                alt=""
+              />
+            </li>
             <br />
           </ul>
         </li>
@@ -44,6 +53,14 @@
               />
             </li>
             <li>Voto: {{ serie.vote_average }}</li>
+            <li>
+              <img
+                class="cover"
+                :src="generateCover(serie.backdrop_path)"
+                @error="isImageBroken"
+                alt=""
+              />
+            </li>
             <br />
           </ul>
         </li>
@@ -65,6 +82,8 @@ export default {
 
   data() {
     return {
+      imageURL: "https://image.tmdb.org/t/p/",
+      backdropSize: "w300",
       brokenURL: "assets/error.png",
       flagURL: "https://flagcdn.com/256x192/",
       formatPNG: ".png",
@@ -83,6 +102,9 @@ export default {
       }
 
       return this.flagURL + flag + this.formatPNG;
+    },
+    generateCover(cover) {
+      return this.imageURL + this.backdropSize + cover;
     },
     isImageBroken(event) {
       //console.log(event);
@@ -103,6 +125,10 @@ main {
   .flag {
     width: 20px;
     height: 15px;
+  }
+
+  .cover {
+    width: 300px;
   }
 }
 </style>
